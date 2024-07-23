@@ -1,34 +1,33 @@
-console.log("hello");
+// adding items using fro loops to the html
+let html = '';
+const productsGrid = document.querySelector(".products-grid");
 
-
-
-let productsHTML =''
+console.log(productsGrid);
 products.forEach((product)=>{
-    productsHTML += `
-
+    html += `
     <div class="product-container">
-        <div class="product-image-container">
+          <div class="product-image-container">
             <img class="product-image"
               src="${product.image}">
-        </div>
+          </div>
 
-        <div class="product-name limit-text-to-2-lines">
+          <div class="product-name limit-text-to-2-lines">
             ${product.name}
-        </div>
+          </div>
 
-        <div class="product-rating-container">
+          <div class="product-rating-container">
             <img class="product-rating-stars"
               src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
-              ${product.rating.count}
+              87
             </div>
-        </div>
+          </div>
 
-        <div class="product-price">
-            $${(product.priceCents / 100).toFixed(2)}
-        </div>
+          <div class="product-price">
+            $${(product.priceCents/100).toFixed(2)}
+          </div>
 
-        <div class="product-quantity-container">
+          <div class="product-quantity-container">
             <select>
               <option selected value="1">1</option>
               <option value="2">2</option>
@@ -41,26 +40,52 @@ products.forEach((product)=>{
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-        </div>
+          </div>
 
-        <div class="product-spacer"></div>
+          <div class="product-spacer"></div>
 
-        <div class="added-to-cart">
+          <div class="added-to-cart">
             <img src="images/icons/checkmark.png">
             Added
-        </div>
+          </div>
 
-        <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary  js-add-to-cart" data-product-id="${product.id}">
             Add to Cart
-        </button>
-          
-    </div>
-    `;
-  
+          </button>
+        </div>
+        `;
 })
-console.log(productsHTML);
+console.log(html);
+productsGrid.innerHTML =html;
 
-const productGrid = document.querySelector(".products-grid");
-productGrid.innerHTML =productsHTML;
 
-console.log(`images/ratings/rating-${products[0].rating.stars * 10}.png`);
+// adding items to the a cart array when the add to cart button is clicked
+document.querySelectorAll(".js-add-to-cart")
+.forEach((button)=>{
+    button.addEventListener("click", ()=>{
+        // console.log("product added")
+
+        const productId=button.dataset.productId;// getting items using the data attribute in the button element
+
+        let matchingItem;
+
+        cart.forEach((item)=>{
+            if(productId ===item.productId){
+                matchingItem=item;
+            }
+        });
+        if(matchingItem){
+            matchingItem.quantity += 1;
+        }else{
+            cart.push({ productId: productId, quantity: 1 });
+        }
+
+
+
+        
+
+        console.log(cart)
+    })
+ 
+});
+
