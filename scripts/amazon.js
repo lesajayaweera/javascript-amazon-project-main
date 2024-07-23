@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart,addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 // adding items using fro loops to the html
 let html = '';
@@ -60,6 +60,15 @@ products.forEach((product)=>{
 console.log(html);
 productsGrid.innerHTML =html;
 
+// making cart quantity displayed on the cart display icon
+function updateCartQuantity(){
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+    // console.log(cartQuantity);
+    document.querySelector(".cart-quantity").textContent = cartQuantity;
+}
 
 // adding items to the a cart array when the add to cart button is clicked
 document.querySelectorAll(".js-add-to-cart")
@@ -69,26 +78,10 @@ document.querySelectorAll(".js-add-to-cart")
 
         const productId=button.dataset.productId;// getting items using the data attribute in the button element
 
-        let matchingItem;
+        addToCart(productId);
 
-        cart.forEach((item)=>{
-            if(productId ===item.productId){
-                matchingItem=item;
-            }
-        });
-        if(matchingItem){
-            matchingItem.quantity += 1;
-        }else{
-            cart.push({ productId: productId, quantity: 1 });
-        }
-// making cart quantity displayed on the cart display icon
-        let cartQuantity =0;
-        cart.forEach((item)=>{
-            cartQuantity+=item.quantity;
-        })
-        // console.log(cartQuantity);
-        document.querySelector(".cart-quantity").textContent =cartQuantity;
         
+        updateCartQuantity();
 
 
         // console.log(cart)
