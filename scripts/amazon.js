@@ -1,3 +1,5 @@
+import { cart } from "../data/cart.js";
+import { products } from "../data/products.js";
 // adding items using fro loops to the html
 let html = '';
 const productsGrid = document.querySelector(".products-grid");
