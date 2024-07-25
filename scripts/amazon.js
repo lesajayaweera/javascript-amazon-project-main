@@ -1,5 +1,6 @@
 import { cart,addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
+import { formatCurrency } from "./utils/money.js";
 // adding items using fro loops to the html
 let html = '';
 const productsGrid = document.querySelector(".products-grid");
@@ -26,7 +27,7 @@ products.forEach((product)=>{
           </div>
 
           <div class="product-price">
-            $${(product.priceCents/100).toFixed(2)}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
@@ -51,13 +52,15 @@ products.forEach((product)=>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary  js-add-to-cart" data-product-id="${product.id}">
+          <button class="add-to-cart-button button-primary  js-add-to-cart" data-product-id="${
+            product.id
+          }">
             Add to Cart
           </button>
         </div>
         `;
 })
-console.log(html);
+// console.log(html);
 productsGrid.innerHTML =html;
 
 // making cart quantity displayed on the cart display icon
