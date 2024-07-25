@@ -1,8 +1,5 @@
-export const cart = [
-  {
-    productId: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
-    quantity: 3,
-  },
+export let cart = [
+  
   {
       productId: "a45cfa0a-66d6-4dc7-9475-e2b01595f7d7",
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -32,3 +29,19 @@ export function addToCart(productId) {
     console.log(cart)
   }
 }
+
+// function to remove items from the cart object
+export function removeFromCart(productId) {
+  const newCart = [];
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productId !== productId) {
+      newCart.push(cartItem);
+    }
+  });
+  cart = newCart;
+  console.log(newCart);
+}
+
+
+
